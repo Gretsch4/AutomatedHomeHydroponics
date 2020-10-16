@@ -9,4 +9,22 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_intro_screen">MainActivity</string>
+    <string name="title_user_profile">User Profile</string>
+    <string name="title_plant_vitals">Plant Vitals</string>
+    <string name="title_plant_search">Plant Search</string>
+    <string name="title_notes">Notes</string>
+    <string name="title_maps">Maps</string>
+    <string name="title_logs">Logs</string>
+    <string name="title_current_vitals">CURRENT VITALS</string>
+    <string name="sensor_tds">TDS</string>
+    <string name="sensor_ph">PH</string>
+    <string name="sensor_humidity">Humidity</string>
+    <string name="sensor_light">Light</string>
+    <string name="sensor_water_temp">Water Temperature</string>
+    <string name="sensor_water_level">Water Level</string>
+    <string name="sensor_ph_up">PH Up Level</string>
+    <string name="sensor_ph_down">pH Down Level</string>
+    <string name="sensor_distance">Distance Sensor</string>
+    <string name="sensor_air_temp">Air Temperature</string>
 </resources>
