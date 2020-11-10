@@ -6,196 +6,278 @@
     android:layout_height="match_parent"
     tools:context=".ui.Plant_Vitals.PlantVitalsFragment">
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal9"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="56dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal8"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="56dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal7"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal6"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal5"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal4"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextNumberDecimal3"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        android:autofillHints="" />
-
     <TextView
-        android:id="@+id/text_plant_vitals"
+        android:id="@+id/textViewWATERLVL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_water_level"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberWATERLVL"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewWATERTEMP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_water_temp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberWATERTEMP"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberPHDOWN"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberPHDOWN"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDIST"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberDIST"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="116dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberDIST"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberWATERTEMP" />
+
+    <EditText
+        android:id="@+id/editTextNumberWATERLVL"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberWATERLVL"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWATERTEMP"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberWATERTEMP"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="116dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberWATERTEMP"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/editTextNumberDIST"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberPHUP"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberPHUP"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPHDOWN"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberAIRTEMP"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberAIRTEMP"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWATERLVL"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberLIGHT"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="24dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberLIGHT"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPHUP"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberHUMID"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="24dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberHUMID"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAIRTEMP"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextNumberPH"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="12dp"
+        android:autofillHints=""
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/editTextNumberPH"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLIGHT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberTDS" />
+
+    <TextView
+        android:id="@+id/textViewHUMID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_humidity"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberHUMID"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLIGHT"
+        android:layout_width="41dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_light"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberLIGHT"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="160dp"
+        android:text="@string/sensor_ph"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberPH"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+    <TextView
+        android:id="@+id/textViewDIST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_distance"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberDIST"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPHUP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/sensor_ph_up"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberPHUP"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewPHDOWN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/sensor_ph_down"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberPHDOWN"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTDS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/sensor_tds"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberTDS"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.709" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewAIRTEMP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/sensor_humidity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="127dp"
-        android:text="@string/sensor_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="215dp"
-        android:layout_marginEnd="139dp"
-        android:text="@string/sensor_ph"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="128dp"
-        android:text="@string/sensor_water_level"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="92dp"
-        android:text="@string/sensor_ph_up"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="128dp"
-        android:text="@string/sensor_ph_down"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="215dp"
-        android:text="@string/sensor_tds"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/sensor_air_temp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNumberAIRTEMP"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNumberDecimal"
+        android:id="@+id/editTextNumberTDS"
         android:layout_width="110dp"
         android:layout_height="52dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="12dp"
+        android:autofillHints=""
+        android:clickable="false"
         android:ems="10"
         android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:autofillHints="" />
+        android:labelFor="@id/editTextNumberTDS"
+        android:focusable="false"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/textViewHUMID"
+
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

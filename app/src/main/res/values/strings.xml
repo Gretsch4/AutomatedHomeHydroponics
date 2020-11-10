@@ -23,8 +23,9 @@
     <string name="sensor_light">Light</string>
     <string name="sensor_water_temp">Water Temperature</string>
     <string name="sensor_water_level">Water Level</string>
-    <string name="sensor_ph_up">PH Up Level</string>
+    <string name="sensor_ph_up">pH Up Level</string>
     <string name="sensor_ph_down">pH Down Level</string>
-    <string name="sensor_distance">Distance Sensor</string>
+    <string name="sensor_distance">Distance</string>
     <string name="sensor_air_temp">Air Temperature</string>
+
 </resources>

@@ -25,13 +25,6 @@ public class NotesFragment extends Fragment {
         notesViewModel =
                 ViewModelProviders.of(this).get(NotesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notes, container, false);
-        final TextView textView = root.findViewById(R.id.text_notes);
-        notesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

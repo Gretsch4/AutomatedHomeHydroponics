@@ -24,13 +24,6 @@ public class LogsFragment extends Fragment {
         logsViewModel =
                 ViewModelProviders.of(this).get(LogsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_logs, container, false);
-        final TextView textView = root.findViewById(R.id.text_logs);
-        logsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 }

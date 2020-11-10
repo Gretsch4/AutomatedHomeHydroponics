@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.automatedhomehydroponics.R;
 import com.example.automatedhomehydroponics.ui.Plant_Vitals.PagerAdapter;
+import com.example.automatedhomehydroponics.wifi.WifiModule;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.tabs.TabItem;
@@ -35,6 +36,11 @@ public class IntroScreen extends AppCompatActivity {
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        WifiModule wifi = WifiModule.getInstance();
+        wifi.placeContext(this);
+        wifi.startPoll();
+
     }
 
 }
