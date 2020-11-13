@@ -23,6 +23,7 @@ public class WifiModule {
     private Context context;
     private ArrayList<Plant> recentPlants = new ArrayList<Plant>();
     Handler handler = new Handler();
+    private String previousMessage = "";
     //OkHttpClient client = new OkHttpClient();
     private static WifiModule instance = new WifiModule();
 
@@ -118,11 +119,12 @@ public class WifiModule {
         protected void onPostExecute(String result){
             if(result != null){
                 serverResponse = result;
-
-                Log.i("debugPost",result);
-                String[] split = result.split(",");
-                recentPlants.add(new Plant(Double.valueOf(split[0]),Double.valueOf(split[1]),Double.valueOf(split[2]),Double.valueOf(split[3]),Double.valueOf(split[4]),Double.valueOf(split[5]),Double.valueOf(split[6]),Double.valueOf(split[7]),Double.valueOf(split[8]),Double.valueOf(split[9])));
-                //recentPlants.add(new Plant(Double.valueOf(splitUpResponse[0]), 1.2,1.3,4.56,235.3,1344.5,5134.5,4343.77,234.33,234.555));
+                Log.i("debugPost", result);
+                if(previousMessage != result) {
+                    String[] split = result.split(",");
+                    //recentPlants.add(new Plant(Double.valueOf(split[0]), Double.valueOf(split[1]), Double.valueOf(split[2]), Double.valueOf(split[3]), Double.valueOf(split[4]), Double.valueOf(split[5]), Double.valueOf(split[6]), Double.valueOf(split[7]), Double.valueOf(split[8]), Double.valueOf(split[9])));
+                    //recentPlants.add(new Plant(Double.valueOf(splitUpResponse[0]), 1.2,1.3,4.56,235.3,1344.5,5134.5,4343.77,234.33,234.555));
+                }
             }
             else {
                 Log.i("error","error");

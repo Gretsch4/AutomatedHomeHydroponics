@@ -1,6 +1,10 @@
 package com.example.automatedhomehydroponics.ui.Plant_Search;
 
-public class Plant {
+import io.realm.RealmObject;
+
+public class Plant  extends RealmObject {
+
+    private int plantId;
     private Double tds = 0.0;
     private Double ph = 0.0;
     private Double humid = 0.0;
@@ -11,7 +15,7 @@ public class Plant {
     private Double waterLvl = 0.0;
     private Double waterTemp = 0.0;
     private Double dist = 0.0;
-
+/*
     public Plant(Double tds, Double ph, Double humid, Double light, Double airTemp, Double phUp, Double phDown, Double waterLvl, Double waterTemp, Double dist){
         this.setTds(tds);
         this.setPh(ph);
@@ -23,6 +27,15 @@ public class Plant {
         this.setWaterLvl(waterLvl);
         this.setWaterTemp(waterTemp);
         this.setDist(dist);
+    }
+*/
+
+    public void setPlantId(int plantId) {
+        this.plantId = plantId;
+    }
+
+    public int getPlantId() {
+        return plantId;
     }
 
     public Double getPh() {

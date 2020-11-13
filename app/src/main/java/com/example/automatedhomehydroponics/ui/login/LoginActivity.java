@@ -26,9 +26,14 @@ import android.widget.Toast;
 import com.example.automatedhomehydroponics.ui.IntroScreen.IntroScreen;
 import com.example.automatedhomehydroponics.R;
 
+import io.realm.Realm;
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private String AppId = "sd2-groupe-aqhxw";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
+
+        Realm.init(this);
+        App app = new App(new AppConfiguration.Builder(AppId).build());
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);

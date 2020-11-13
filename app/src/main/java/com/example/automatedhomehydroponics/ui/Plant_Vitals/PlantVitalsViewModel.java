@@ -79,71 +79,69 @@ public class PlantVitalsViewModel extends ViewModel {
         setTextDIST(mostRecent.getDist());
     }
 
-    public void setTextTDS(Double num) {
-        tdsDeci.setValue(num);
-    }
+    public void setTextTDS(Double num) { tdsDeci.postValue(num);}
     public LiveData<Double> getTextTDS() {
         return tdsDeci;
     }
 
     public void setTextPH(Double num) {
-        phDeci.setValue(num);
+        phDeci.postValue(num);
     }
     public LiveData<Double> getTextPH() {
         return phDeci;
     }
 
     public void setTextHUMID(Double num) {
-        humidDeci.setValue(num);
+        humidDeci.postValue(num);
     }
     public LiveData<Double> getTextHUMID() {
         return humidDeci;
     }
 
     public void setTextLIGHT(Double num) {
-        lightDeci.setValue(num);
+        lightDeci.postValue(num);
     }
     public LiveData<Double> getTextLIGHT() {
         return lightDeci;
     }
 
     public void setTextAIRTEMP(Double num) {
-        airTempDeci.setValue(num);
+        airTempDeci.postValue(num);
     }
     public LiveData<Double> getTextAIRTEMP() {
         return airTempDeci;
     }
 
     public void setTextWATERTEMP(Double num) {
-        waterTempDeci.setValue(num);
+        waterTempDeci.postValue(num);
     }
     public LiveData<Double> getTextWATERTEMP() {
         return waterTempDeci;
     }
 
     public void setTextPHUP(Double num) {
-        phUpDeci.setValue(num);
+        phUpDeci.postValue(num);
     }
     public LiveData<Double> getTextPHUP() {
         return phUpDeci;
     }
 
     public void setTextPHDOWN(Double num) {
-        phDownDeci.setValue(num);
+        phDownDeci.postValue(num);
     }
     public LiveData<Double> getTextPHDOWN() {
         return phDownDeci;
     }
 
     public void setTextWATERLVL(Double num) {
-        waterLvlDeci.setValue(num);
+        waterLvlDeci.postValue(num);
     }
     public LiveData<Double> getTextWATERLVL() {
         return waterLvlDeci;
     }
 
     public void setTextDIST(Double num) {
-        distanceDeci.setValue(num);
+        distanceDeci.postValue(num);
     }
     public LiveData<Double> getTextDIST() {
         return distanceDeci;
