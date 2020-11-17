@@ -122,8 +122,18 @@ public class WifiModule {
                 Log.i("debugPost", result);
                 if(previousMessage != result) {
                     String[] split = result.split(",");
-                    //recentPlants.add(new Plant(Double.valueOf(split[0]), Double.valueOf(split[1]), Double.valueOf(split[2]), Double.valueOf(split[3]), Double.valueOf(split[4]), Double.valueOf(split[5]), Double.valueOf(split[6]), Double.valueOf(split[7]), Double.valueOf(split[8]), Double.valueOf(split[9])));
-                    //recentPlants.add(new Plant(Double.valueOf(splitUpResponse[0]), 1.2,1.3,4.56,235.3,1344.5,5134.5,4343.77,234.33,234.555));
+                    Plant newPlant = new Plant();
+                    newPlant.setTds(Double.valueOf(split[1]));
+                    newPlant.setPh(Double.valueOf(split[2]));
+                    newPlant.setWaterTemp(Double.valueOf(split[3]));
+                    newPlant.setAirTemp(Double.valueOf(split[4]));
+                    newPlant.setHumid(Double.valueOf(split[5]));
+                    newPlant.setLight(Double.valueOf(split[6]));
+                    newPlant.setDist(Double.valueOf(split[7]));
+                    newPlant.setWaterLvl(Double.valueOf(split[8]));
+                    newPlant.setPhUp(Double.valueOf(split[9]));
+                    newPlant.setPhDown(Double.valueOf(split[10]));
+                    recentPlants.add(newPlant);
                 }
             }
             else {

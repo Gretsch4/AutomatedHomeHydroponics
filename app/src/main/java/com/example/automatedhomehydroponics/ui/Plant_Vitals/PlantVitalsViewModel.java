@@ -79,62 +79,62 @@ public class PlantVitalsViewModel extends ViewModel {
         setTextDIST(mostRecent.getDist());
     }
 
-    public void setTextTDS(Double num) { tdsDeci.postValue(num);}
+    public void setTextTDS(Double num) { tdsDeci.setValue(num);}
     public LiveData<Double> getTextTDS() {
         return tdsDeci;
     }
 
     public void setTextPH(Double num) {
-        phDeci.postValue(num);
+        phDeci.setValue(num);
     }
     public LiveData<Double> getTextPH() {
         return phDeci;
     }
 
     public void setTextHUMID(Double num) {
-        humidDeci.postValue(num);
+        humidDeci.setValue(num);
     }
     public LiveData<Double> getTextHUMID() {
         return humidDeci;
     }
 
     public void setTextLIGHT(Double num) {
-        lightDeci.postValue(num);
+        lightDeci.setValue(num);
     }
     public LiveData<Double> getTextLIGHT() {
         return lightDeci;
     }
 
     public void setTextAIRTEMP(Double num) {
-        airTempDeci.postValue(num);
+        airTempDeci.setValue(num);
     }
     public LiveData<Double> getTextAIRTEMP() {
         return airTempDeci;
     }
 
     public void setTextWATERTEMP(Double num) {
-        waterTempDeci.postValue(num);
+        waterTempDeci.setValue(num);
     }
     public LiveData<Double> getTextWATERTEMP() {
         return waterTempDeci;
     }
 
     public void setTextPHUP(Double num) {
-        phUpDeci.postValue(num);
+        phUpDeci.setValue(num);
     }
     public LiveData<Double> getTextPHUP() {
         return phUpDeci;
     }
 
     public void setTextPHDOWN(Double num) {
-        phDownDeci.postValue(num);
+        phDownDeci.setValue(num);
     }
     public LiveData<Double> getTextPHDOWN() {
         return phDownDeci;
     }
 
     public void setTextWATERLVL(Double num) {
-        waterLvlDeci.postValue(num);
+        waterLvlDeci.setValue(num);
     }
     public LiveData<Double> getTextWATERLVL() {
         return waterLvlDeci;

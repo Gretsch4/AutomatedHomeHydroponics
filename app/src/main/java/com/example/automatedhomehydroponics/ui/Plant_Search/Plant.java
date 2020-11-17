@@ -2,7 +2,7 @@ package com.example.automatedhomehydroponics.ui.Plant_Search;
 
 import io.realm.RealmObject;
 
-public class Plant  extends RealmObject {
+public class Plant extends RealmObject{
 
     private int plantId;
     private Double tds = 0.0;
@@ -28,8 +28,8 @@ public class Plant  extends RealmObject {
         this.setWaterTemp(waterTemp);
         this.setDist(dist);
     }
-*/
 
+*/
     public void setPlantId(int plantId) {
         this.plantId = plantId;
     }
