@@ -31,8 +31,8 @@ public class CustomAdapter extends RecyclerView.Adapter<LogsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull LogsViewHolder holder, int position) {
         Plant p = plant.get(position);
-
-        holder.txt_log.setText(p.getAirTemp().toString());
+        LogsViewHolder viewHolder = (LogsViewHolder) holder;
+        viewHolder.txt_log.setText(p.getAirTemp().toString());
 
     }
 

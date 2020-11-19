@@ -8,7 +8,12 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.automatedhomehydroponics.ui.Plant_Search.Plant;
+import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsFragment;
+import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,18 +29,15 @@ public class WifiModule {
     private ArrayList<Plant> recentPlants = new ArrayList<Plant>();
     Handler handler = new Handler();
     private String previousMessage = "";
-    //OkHttpClient client = new OkHttpClient();
     private static WifiModule instance = new WifiModule();
+    private Plant mostRecent;
 
     // variable of type String
     public String s;
 
 
     // static method to create instance of Singleton class
-    public static WifiModule getInstance()
-    {
-        return instance;
-    }
+    public static WifiModule getInstance(){return instance;}
 
     public WifiModule(Context context){
         this.serverResponse = "0.0";
@@ -43,7 +45,7 @@ public class WifiModule {
         //this.client = new OkHttpClient();
     }
 
-    public WifiModule(){
+    public WifiModule() {
         //recentPlants.add(new Plant(0.0, 1.2,1.3,4.56,235.3,1344.5,5134.5,4343.77,234.33,234.555));
         //this.client = new OkHttpClient();
     }
@@ -66,14 +68,17 @@ public class WifiModule {
     public void placeContext(Context context){
         this.context = context;
     }
+
     private Runnable actualStatus = new Runnable(){
         int counter=0;
         @Override
         public void run() {
             sendCommand("" + counter++);
-            handler.postDelayed(this, 20000);
+
+            handler.postDelayed(this, 10000);
         }
     };
+
 
     public static String getPlantInfo(String serverAddress) {
         OkHttpClient client = new OkHttpClient();
@@ -133,7 +138,7 @@ public class WifiModule {
                     newPlant.setWaterLvl(Double.valueOf(split[8]));
                     newPlant.setPhUp(Double.valueOf(split[9]));
                     newPlant.setPhDown(Double.valueOf(split[10]));
-                    recentPlants.add(newPlant);
+                    recentPlants.add(0,newPlant);
                 }
             }
             else {

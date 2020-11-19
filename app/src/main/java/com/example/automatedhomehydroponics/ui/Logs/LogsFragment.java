@@ -20,6 +20,8 @@ import com.example.automatedhomehydroponics.R;
 import com.example.automatedhomehydroponics.RealmHelper.RealmManager;
 import com.example.automatedhomehydroponics.ui.Plant_Search.Plant;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 
@@ -38,16 +40,6 @@ public class LogsFragment extends Fragment {
                 ViewModelProviders.of(this).get(LogsViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_logs, container, false);
-
-        rv = root.findViewById(R.id.log_RV);
-        manager = new RealmManager(realm);
-        manager.selectFromDB();
-
-        CustomAdapter adapter = new CustomAdapter(context, manager.justRefresh());
-        rv.setLayoutManager(new LinearLayoutManager(context));
-        rv.setAdapter(adapter);
-
-        update();
         return root;
     }
 
@@ -91,5 +83,28 @@ public class LogsFragment extends Fragment {
         super.onDestroy();
         realm.removeChangeListener(realmChangeListener);
         realm.close();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        rv = view.findViewById(R.id.log_RV);
+        //view.getLogList().observe
+        manager = new RealmManager(realm);
+        manager.selectFromDB();
+
+        final CustomAdapter adapter = new CustomAdapter(context, manager.justRefresh());
+        rv.setLayoutManager(new LinearLayoutManager(context));
+        rv.setAdapter(adapter);
+
+        Observer<ArrayList<String>> logListUpdate = new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> logArrayList) {
+                //adapter = new RecyclerView  (context,logArrayList);
+
+            }
+        };
+        //update();
     }
 }

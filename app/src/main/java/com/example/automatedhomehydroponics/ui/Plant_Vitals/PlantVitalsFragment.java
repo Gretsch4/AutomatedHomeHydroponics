@@ -33,8 +33,8 @@ public class PlantVitalsFragment extends Fragment {
         plantVitalsViewModel =
                 ViewModelProviders.of(this).get(PlantVitalsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_plant_vitals, container, false);
-        PlantVitalsViewModel plantVitals = new ViewModelProvider(this).get(PlantVitalsViewModel.class);
-        //final TextView textView = root.findViewById(R.id.text_plant_vitals);
+        //PlantVitalsViewModel plantVitals = new ViewModelProvider(this).get(PlantVitalsViewModel.class);
+
         final TextView tds = root.findViewById(R.id.editTextNumberTDS);
         final TextView ph = root.findViewById(R.id.editTextNumberPH);
         final TextView humid = root.findViewById(R.id.editTextNumberHUMID);
@@ -45,13 +45,14 @@ public class PlantVitalsFragment extends Fragment {
         final TextView phDown = root.findViewById(R.id.editTextNumberPHDOWN);
         final TextView waterTemp = root.findViewById(R.id.editTextNumberWATERTEMP);
         final TextView dist = root.findViewById(R.id.editTextNumberDIST);
-
+/*
         plantVitals.getTextTDS().observe(getViewLifecycleOwner(),new Observer<Double>() {
             @Override
             public void onChanged(@Nullable Double number) {
                 tds.setText(number.toString());
             }
         });
+*/
 /*
         plantVitalsViewModel.getTextTDS().observe(getViewLifecycleOwner(), new Observer<Double>() {
             @Override
@@ -59,7 +60,7 @@ public class PlantVitalsFragment extends Fragment {
                 tds.setText(number.toString());
             }
         });
-*/
+
         plantVitalsViewModel.getTextPH().observe(getViewLifecycleOwner(), new Observer<Double>() {
             @Override
             public void onChanged(@Nullable Double number) {
@@ -124,8 +125,96 @@ public class PlantVitalsFragment extends Fragment {
         });
 
         plantVitalsViewModel.updateVitals();
-
+    */
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final TextView tds = view.findViewById(R.id.editTextNumberTDS);
+        final TextView ph = view.findViewById(R.id.editTextNumberPH);
+        final TextView humid = view.findViewById(R.id.editTextNumberHUMID);
+        final TextView light = view.findViewById(R.id.editTextNumberLIGHT);
+        final TextView airTemp = view.findViewById(R.id.editTextNumberAIRTEMP);
+        final TextView phUp = view.findViewById(R.id.editTextNumberPHUP);
+        final TextView waterLvl = view.findViewById(R.id.editTextNumberWATERLVL);
+        final TextView phDown = view.findViewById(R.id.editTextNumberPHDOWN);
+        final TextView waterTemp = view.findViewById(R.id.editTextNumberWATERTEMP);
+        final TextView dist = view.findViewById(R.id.editTextNumberDIST);
+
+        plantVitalsViewModel.getTextTDS().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                tds.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextPH().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                ph.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextHUMID().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                humid.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextLIGHT().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                light.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextAIRTEMP().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                airTemp.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextPHUP().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                phUp.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextPHDOWN().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                phDown.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextWATERLVL().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                waterLvl.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextWATERTEMP().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                waterTemp.setText(number.toString());
+            }
+        });
+
+        plantVitalsViewModel.getTextDIST().observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double number) {
+                dist.setText(number.toString());
+            }
+        });
+    }
+
+    public void updateVitals(){
+        plantVitalsViewModel.updateVitals();
+    }
 }

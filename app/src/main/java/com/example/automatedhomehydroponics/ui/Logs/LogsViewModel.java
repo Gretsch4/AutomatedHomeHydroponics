@@ -4,16 +4,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class LogsViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<ArrayList<String>> logsListData;
+    private ArrayList<String> logsList;
 
     public LogsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Logs");
+        logsListData = new MutableLiveData<>();
+        logsListData.setValue(logsList);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<ArrayList<String>> getLogList()
+    {
+        return logsListData;
     }
 }
