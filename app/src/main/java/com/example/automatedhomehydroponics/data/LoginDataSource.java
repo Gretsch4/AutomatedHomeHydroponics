@@ -10,7 +10,7 @@ import java.io.IOException;
 public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
-
+// this is where you authenticate the user login through mongodb
         try {
             // TODO: handle loggedInUser authentication
             LoggedInUser fakeUser =

@@ -1,27 +1,18 @@
 package com.example.automatedhomehydroponics.ui.IntroScreen;
 
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.example.automatedhomehydroponics.R;
-import com.example.automatedhomehydroponics.ui.Plant_Vitals.PagerAdapter;
-import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsFragment;
 import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsViewModel;
 import com.example.automatedhomehydroponics.wifi.WifiModule;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
-
-import java.io.IOException;
 
 public class IntroScreen extends AppCompatActivity {
 
@@ -50,6 +41,7 @@ public class IntroScreen extends AppCompatActivity {
         //plantVitals = new ViewModelProvider(this).get(PlantVitalsViewModel.class);
         wifi = WifiModule.getInstance();
         wifi.placeContext(this);
+
         //wifi.startPoll();
     }
 }

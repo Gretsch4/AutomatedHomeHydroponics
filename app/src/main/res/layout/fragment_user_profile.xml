@@ -23,43 +23,33 @@
         app:layout_constraintVertical_bias="0.087" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/lighting_button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
         android:layout_marginBottom="9dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:text="Lighting"
+        app:layout_constraintBottom_toTopOf="@+id/waterPump_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/waterPump_button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
         android:layout_marginBottom="7dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:text="Water Pump"
+        app:layout_constraintBottom_toTopOf="@+id/airPump_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:id="@+id/airPump_button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginBottom="4dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginBottom="65dp"
-        android:text="Button"
+        android:layout_marginBottom="64dp"
+        android:text="Air Pump"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

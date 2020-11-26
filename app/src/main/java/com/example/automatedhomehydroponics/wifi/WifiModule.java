@@ -7,30 +7,45 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.automatedhomehydroponics.ui.Plant_Search.Plant;
-import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsFragment;
-import com.example.automatedhomehydroponics.ui.Plant_Vitals.PlantVitalsViewModel;
+import com.example.automatedhomehydroponics.ui.Plant_Search.PlantLogs;
+
+import org.bson.BsonObjectId;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.mongodb.App;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.result.InsertOneResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class WifiModule {
     private String serverAddress = "192.168.1.150";
     private String serverResponse = "";
-    private Context context;
-    private ArrayList<Plant> recentPlants = new ArrayList<Plant>();
+    private static Context context;
+    private static ArrayList<PlantLogs> recentPlants = new ArrayList<PlantLogs>();
     Handler handler = new Handler();
-    private String previousMessage = "";
+    private static String previousMessage = "";
     private static WifiModule instance = new WifiModule();
-    private Plant mostRecent;
+    private static PlantLogs mostRecent;
+    private static App app;
+    private static User user;
+
+    Realm realm;
 
     // variable of type String
     public String s;
@@ -41,7 +56,7 @@ public class WifiModule {
 
     public WifiModule(Context context){
         this.serverResponse = "0.0";
-        this.context = context;
+        WifiModule.context = context;
         //this.client = new OkHttpClient();
     }
 
@@ -54,19 +69,24 @@ public class WifiModule {
         handler.postDelayed(actualStatus, 0);
     }
 
-    public Plant getMostRecentPlants(){
-        if(recentPlants.isEmpty())
-            return null;
+    public static PlantLogs getMostRecentPlants(){
+        //if(recentPlants.isEmpty())
+            //return null;
 
-        return recentPlants.get(0);
+        return mostRecent;
     }
 
-    public ArrayList<Plant> getRecentPlants(){
+    public ArrayList<PlantLogs> getRecentPlants(){
         return recentPlants;
     }
 
     public void placeContext(Context context){
-        this.context = context;
+        WifiModule.context = context;
+    }
+
+
+    public void placeApp(App app){
+        WifiModule.app = app;
     }
 
     private Runnable actualStatus = new Runnable(){
@@ -96,9 +116,13 @@ public class WifiModule {
         }
     }
 
+    public static User getUser() {
+        return user;
+    }
+
     public void sendCommand(String command){
         ConnectivityManager connManager = (ConnectivityManager)
-                context.getSystemService(context.CONNECTIVITY_SERVICE);
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
         if(networkInfo != null && networkInfo.isConnected()){
@@ -124,21 +148,103 @@ public class WifiModule {
         protected void onPostExecute(String result){
             if(result != null){
                 serverResponse = result;
-                Log.i("debugPost", result);
-                if(previousMessage != result) {
+                Log.i("debugPost0", previousMessage + " = " + result);
+                if(!previousMessage.equals(result)) {
+                    Log.i("debugPost", result);
                     String[] split = result.split(",");
-                    Plant newPlant = new Plant();
-                    newPlant.setTds(Double.valueOf(split[1]));
-                    newPlant.setPh(Double.valueOf(split[2]));
-                    newPlant.setWaterTemp(Double.valueOf(split[3]));
-                    newPlant.setAirTemp(Double.valueOf(split[4]));
-                    newPlant.setHumid(Double.valueOf(split[5]));
-                    newPlant.setLight(Double.valueOf(split[6]));
-                    newPlant.setDist(Double.valueOf(split[7]));
-                    newPlant.setWaterLvl(Double.valueOf(split[8]));
-                    newPlant.setPhUp(Double.valueOf(split[9]));
-                    newPlant.setPhDown(Double.valueOf(split[10]));
+
+                    final PlantLogs newPlant = new PlantLogs();
+                    newPlant.setTds(split[0]);
+                    newPlant.setPh(split[1]);
+                    newPlant.setWaterTemp(split[2]);
+                    newPlant.setAirTemp(split[3]);
+                    newPlant.setHumid(split[4]);
+                    newPlant.setLight(split[5]);
+                    newPlant.setDist(split[6]);
+                    newPlant.setWaterLvl(split[7]);
+                    newPlant.setNutrientLvl(split[8]);
+                    newPlant.setPhUp(split[9]);
+                    newPlant.setPhDown(split[10]);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, (EEE, d MMM yyyy)");
+                    String currentDateandTime = sdf.format(new Date());
+                    newPlant.setDate(currentDateandTime);
+
                     recentPlants.add(0,newPlant);
+                    mostRecent = newPlant;
+
+                    user = app.currentUser();
+                    MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+                    MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
+                    MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("PlantLogs");
+
+                    Document PlantLogs = new Document("date", currentDateandTime)
+                            .append("tds", split[0])
+                            .append("ph", split[1])
+                            .append("humid", split[2])
+                            .append("light", split[3])
+                            .append("airTemp", split[4])
+                            .append("waterTemp", split[5])
+                            .append("waterLvl", split[6])
+                            .append("dist", split[7])
+                            .append("phUp", split[8])
+                            .append("phDown", split[9])
+                            .append("nutrientLvl", split[10]);
+
+                    mongoCollection.insertOne(PlantLogs).getAsync(new App.Callback<InsertOneResult>() {
+                        @Override
+                        public void onResult(App.Result<InsertOneResult> task) {
+                            if (task.isSuccess()) {
+                                BsonObjectId insertedId = task.get().getInsertedId().asObjectId();
+                                Log.v("EXAMPLE", "successfully inserted a document with id " + insertedId);
+                            } else {
+                                Log.e("EXAMPLE", "failed to insert document with: ", task.getError());
+                            }
+                        }
+                    });
+
+/*
+                    realm = Realm.getDefaultInstance();
+                    Log.i("realmSchema", "before exe" + realm.getSchema().toString());
+                        realm.executeTransactionAsync(new Realm.Transaction(){
+                            @Override
+                            public void execute(Realm realm) {
+                                PlantLogs plant = realm.createObject(PlantLogs.class);
+                                plant.set_id(new ObjectId());
+                                plant.setTds(newPlant.getTds());
+                                plant.setPh(newPlant.getPh());
+                                plant.setWaterTemp(newPlant.getWaterTemp());
+                                plant.setAirTemp(newPlant.getAirTemp());
+                                plant.setHumid(newPlant.getHumid());
+                                plant.setLight(newPlant.getLight());
+                                plant.setDist(newPlant.getDist());
+                                plant.setWaterLvl(newPlant.getWaterLvl());
+                                plant.setNutrientLvl(newPlant.getNutrientLvl());
+                                plant.setPhUp(newPlant.getPhUp());
+                                plant.setPhDown(newPlant.getPhDown());
+                                plant.setDate((newPlant.getDate()));
+
+                                Log.i("realmExe", "passed through realm");
+                                //realm.insert(newPlant);
+                            }
+                        }, new Realm.Transaction.OnSuccess() {
+                            @Override
+                            public void onSuccess(){
+                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                                Log.i("realmExe", "exe confirmed");
+                                realm.close();
+                            }
+
+                        }, new Realm.Transaction.OnError() {
+                            @Override
+                            public  void onError(Throwable error) {
+                                Toast.makeText(context, "Input Failed", Toast.LENGTH_SHORT).show();
+                                realm.close();
+                            }
+                        });
+
+ */
+                    previousMessage = serverResponse;
                 }
             }
             else {

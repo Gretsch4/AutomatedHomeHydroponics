@@ -1,6 +1,5 @@
 package com.example.automatedhomehydroponics.RealmHelper;
-import com.example.automatedhomehydroponics.ui.Plant_Search.Plant;
-import android.provider.Contacts;
+import com.example.automatedhomehydroponics.ui.Plant_Search.PlantLogs;
 
 import java.util.ArrayList;
 
@@ -9,19 +8,21 @@ import io.realm.RealmResults;
 
 public class RealmManager {
     Realm realm;
-    RealmResults<Plant> plant;
+    RealmResults<PlantLogs> plant;
 
     public RealmManager(Realm realm) {
         this.realm = realm;
     }
 
     public void selectFromDB(){
-        plant = realm.where(Plant.class).findAll();
+        //plant = realm.where(PlantLogs.class).findAll();
+
+
     }
 
-    public ArrayList<Plant> justRefresh() {
-        ArrayList<Plant> logList = new ArrayList<>();
-        for(Plant p : plant) {
+    public ArrayList<PlantLogs> justRefresh() {
+        ArrayList<PlantLogs> logList = new ArrayList<>();
+        for(PlantLogs p : plant) {
             logList.add(p);
         }
 

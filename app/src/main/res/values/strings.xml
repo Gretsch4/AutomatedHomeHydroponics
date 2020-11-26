@@ -27,5 +27,12 @@
     <string name="sensor_ph_down">pH Down Level</string>
     <string name="sensor_distance">Distance</string>
     <string name="sensor_air_temp">Air Temperature</string>
+    <string name="sensor_nutrient">Nutrient Level</string>
+    <string name="log_card_title">Log Title</string>
+    <string name="log_card_body">Log Body</string>
+    <string name="plant_card_title">Plant Title</string>
+    <string name="plant_card_body">Plant Body</string>
+    <string name="notes_card_title">Notes Title</string>
+    <string name="notes_card_body">Notes Body</string>
 
 </resources>

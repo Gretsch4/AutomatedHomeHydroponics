@@ -21,7 +21,11 @@
         android:id="@+id/navigation_plant_search"
         android:name="com.example.automatedhomehydroponics.ui.Plant_Search.PlantSearchFragment"
         android:label="@string/title_plant_search"
-        tools:layout="@layout/fragment_plant_search" />
+        tools:layout="@layout/fragment_plant_search" >
+        <action
+            android:id="@+id/action_navigation_plant_search_to_navigation_plant_search_add"
+            app:destination="@id/navigation_plant_search_add" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notes"
@@ -34,4 +38,10 @@
         android:name="com.example.automatedhomehydroponics.ui.Logs.LogsFragment"
         android:label="@string/title_logs"
         tools:layout="@layout/fragment_logs" />
+
+    <fragment
+        android:id="@+id/navigation_plant_search_add"
+        android:name="com.example.automatedhomehydroponics.ui.Plant_Search.PlantSearchAddFragment"
+        android:label="Add Plant"
+        tools:layout="@layout/fragment_plant_search_add" />
 </navigation>
