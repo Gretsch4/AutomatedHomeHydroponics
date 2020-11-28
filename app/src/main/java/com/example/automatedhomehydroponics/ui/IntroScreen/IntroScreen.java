@@ -39,7 +39,7 @@ public class IntroScreen extends AppCompatActivity {
 
         //plantVitals = getSupportFragmentManager().getFragment(savedInstanceState, PlantVitalsFragment.class.toString());
         //plantVitals = new ViewModelProvider(this).get(PlantVitalsViewModel.class);
-        wifi = WifiModule.getInstance();
+        wifi = new WifiModule();
         wifi.placeContext(this);
 
         //wifi.startPoll();

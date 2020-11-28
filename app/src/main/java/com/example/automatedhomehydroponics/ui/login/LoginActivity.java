@@ -24,9 +24,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.automatedhomehydroponics.RealmHelper.Manager;
 import com.example.automatedhomehydroponics.ui.IntroScreen.IntroScreen;
 import com.example.automatedhomehydroponics.R;
 import com.example.automatedhomehydroponics.wifi.WifiModule;
+
+import org.bson.BsonObjectId;
+import org.bson.Document;
 
 import io.realm.DynamicRealm;
 import io.realm.Realm;
@@ -39,6 +43,9 @@ import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.result.InsertOneResult;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private String AppId = "sd2-groupe-aqhxw";
     private WifiModule wifi;
     private User user;
+    private Manager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (it.isSuccess()) {
                     user = app.currentUser();
                     assert user != null;
-                    MongoClient mongoClient = user.getMongoClient("<atlas service name>");
+                    MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
                     if (mongoClient != null) {
                         Log.v("df", "Successfully connected to the MongoDB instance.");
                     } else {
@@ -74,8 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        wifi = WifiModule.getInstance();
+        wifi = new WifiModule();
         wifi.placeApp(app);
+        manager = new Manager(app.currentUser());
 
         RealmConfiguration config = new RealmConfiguration.Builder().allowWritesOnUiThread(true).deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(config);
@@ -83,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+        final Button registerButton = findViewById(R.id.buttonR);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -160,11 +170,33 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = app.currentUser();
+                MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
+                MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("LoginInfo");
+
+                Document queryFilter  = new Document("email",usernameEditText.getText().toString()).append("password", passwordEditText.getText().toString());
+                mongoCollection.insertOne(queryFilter).getAsync(new App.Callback<InsertOneResult>() {
+                    @Override
+                    public void onResult(App.Result<InsertOneResult> task) {
+                        if (task.isSuccess()) {
+                            BsonObjectId insertedId = task.get().getInsertedId().asObjectId();
+                            Log.v("EXAMPLE", "successfully inserted a document with id " + insertedId);
+                        } else {
+                            Log.e("EXAMPLE", "failed to find document with: ", task.getError());
+                        }
+                    }
+                });
+            }
+        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
+        String welcome = getString(R.string.welcome);
         openIntroScreen();
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

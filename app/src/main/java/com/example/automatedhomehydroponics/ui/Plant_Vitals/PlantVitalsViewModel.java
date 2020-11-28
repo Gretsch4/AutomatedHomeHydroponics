@@ -37,18 +37,18 @@ public class PlantVitalsViewModel extends ViewModel {
 
         @Override
         public void run() {
-            plantData.sendCommand("I");
-            counter++;
-            if(counter == 2)
+            if(counter >= 2)
                 counter = 0;
 
-            updateVitals();
             if(counter%2 == 0) {
-                handler.postDelayed(this, 3000);
+                plantData.sendCommand("I");
+                handler.postDelayed(this, 5000);
             }
             else {
+                updateVitals();
                 handler.postDelayed(this, 30000);
             }
+            counter++;
         }
     };
 

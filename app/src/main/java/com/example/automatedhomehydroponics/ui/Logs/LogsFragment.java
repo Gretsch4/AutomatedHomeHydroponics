@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automatedhomehydroponics.R;
-import com.example.automatedhomehydroponics.RealmHelper.RealmManager;
+import com.example.automatedhomehydroponics.RealmHelper.Manager;
 import com.example.automatedhomehydroponics.ui.Plant_Search.PlantLogs;
 import com.example.automatedhomehydroponics.wifi.WifiModule;
 import com.google.android.gms.tasks.Task;
@@ -46,7 +46,6 @@ public class LogsFragment extends Fragment {
     private LogsViewModel logsViewModel;
     Realm realm;
     RecyclerView rv;
-    RealmManager manager;
     Context context;
     RealmChangeListener realmChangeListener;
     private static ArrayList<PlantLogs> plantLogsList;
@@ -121,7 +120,7 @@ public class LogsFragment extends Fragment {
                             plant.setPhUp(phUp);
                             plant.setPhDown(phDown);
                             plant.setNutrientLvl(nutrientLvl);
-                            plantLogsArrayList.add(plant);
+                            plantLogsArrayList.add(0,plant);
                             Log.e("EXAMPLE", "failed to find documents with: "+ plantLogsArrayList.size());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -136,35 +135,10 @@ public class LogsFragment extends Fragment {
         });
         Log.e("EXAMPLE", "failed to find documents with:  FIANLLLL"+ plantLogsArrayList.size());
         return plantLogsArrayList;
-/*
-        RealmEventStreamAsyncTask<Document> watcher = mongoCollection.watchAsync();
-        watcher.get(new App.Callback<BaseChangeEvent<Document>>() {
-            @Override
-            public void onResult(App.Result<BaseChangeEvent<Document>> result) {
-                if (result.isSuccess()) {
-                    Log.v(
-                            "EXAMPLE",
-                            "Event type: " + result.get().getOperationType() + " full document: " + result.get().getFullDocument()
-                    );
-
-
-                } else {
-                    Log.e("EXAMPLE", "failed to subscribe to changes in the collection with : ", result.getError());
-                }
-            }
-        });
-*/
     }
 
     public void setPlantList(ArrayList<PlantLogs> plants){
         this.plantLogsList = plants;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-       // realm.removeChangeListener(realmChangeListener);
-        //realm.close();
     }
 
     @Override
@@ -174,12 +148,12 @@ public class LogsFragment extends Fragment {
         rv = view.findViewById(R.id.log_RV);
         //view.getLogList().observe
         //realm = Realm.getDefaultInstance();
-        //manager = new RealmManager(realm);
         //manager.selectFromDB();
         context = getActivity();
         //update();
         //ArrayList<PlantLogs> result = update();
-        User user = new WifiModule().getUser();
+        //User user = new WifiModule().getUser();
+        User user = new Manager().getUser();
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
         MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("PlantLogs");
@@ -227,7 +201,7 @@ public class LogsFragment extends Fragment {
                             plant.setPhUp(phUp);
                             plant.setPhDown(phDown);
                             plant.setNutrientLvl(nutrientLvl);
-                            plantLogsArrayList.add(plant);
+                            plantLogsArrayList.add(0,plant);
                             Log.e("EXAMPLE", "failed to find documents with: "+ plantLogsArrayList.size());
 
                         } catch (JSONException e) {

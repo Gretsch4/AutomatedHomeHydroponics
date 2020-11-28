@@ -31,7 +31,11 @@
         android:id="@+id/navigation_notes"
         android:name="com.example.automatedhomehydroponics.ui.Notes.NotesFragment"
         android:label="@string/title_notes"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_navigation_notes_to_navigation_notes_add"
+            app:destination="@id/navigation_notes_add" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_logs"
@@ -43,5 +47,21 @@
         android:id="@+id/navigation_plant_search_add"
         android:name="com.example.automatedhomehydroponics.ui.Plant_Search.PlantSearchAddFragment"
         android:label="Add Plant"
-        tools:layout="@layout/fragment_plant_search_add" />
+        tools:layout="@layout/fragment_plant_search_add" >
+        <action
+            android:id="@+id/action_navigation_plant_search_add_to_navigation_plant_search"
+            app:destination="@id/navigation_plant_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notes_add"
+        android:name="com.example.automatedhomehydroponics.ui.Notes.NotesAddFragment"
+        android:label="Add Note"
+        tools:layout="@layout/fragment_notes_add" >
+        <action
+            android:id="@+id/action_navigation_notes_add_to_navigation_notes"
+            app:destination="@id/navigation_notes" />
+    </fragment>
+
+
 </navigation>

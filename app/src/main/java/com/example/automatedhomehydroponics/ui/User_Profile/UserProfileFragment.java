@@ -49,9 +49,11 @@ public class UserProfileFragment extends Fragment {
                     counterL = 0;
 
                 if(counterL%2 == 0)
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0");
+                    // 16
+                    //tdsamx,tdsmin,phmax,phmin,waterTmax,waterTmin,airTmax,airTmin,humidmax,humidmin,lightMax,lightmin, hours, lightrelay,waterrelay,airrelay
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0");
                 else
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0");
                 counterL++;
             }
         });
@@ -62,9 +64,9 @@ public class UserProfileFragment extends Fragment {
                     counterW = 0;
 
                 if(counterW%2 == 0)
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0");
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0");
                 else
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0");
 
                 counterW++;
             }
@@ -76,9 +78,9 @@ public class UserProfileFragment extends Fragment {
                     counterA = 0;
 
                 if(counterA%2 == 0)
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0");
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0");
                 else
-                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0");
+                    plantData.sendCommand("0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0");
 
                 counterA++;
             }

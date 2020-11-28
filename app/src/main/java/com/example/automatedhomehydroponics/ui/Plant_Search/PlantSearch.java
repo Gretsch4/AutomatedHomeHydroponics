@@ -5,7 +5,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class PlantSearch extends RealmObject{
+public class PlantSearch {
     @PrimaryKey
     private ObjectId _id;
     @Required

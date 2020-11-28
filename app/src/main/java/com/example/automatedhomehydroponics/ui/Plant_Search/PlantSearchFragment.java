@@ -7,26 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 //import android.app.Fragment;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automatedhomehydroponics.R;
-import com.example.automatedhomehydroponics.RealmHelper.RealmManager;
-import com.example.automatedhomehydroponics.RealmHelper.RealmPlantManager;
-import com.example.automatedhomehydroponics.ui.Logs.CustomAdapter;
+import com.example.automatedhomehydroponics.RealmHelper.Manager;
 import com.example.automatedhomehydroponics.wifi.WifiModule;
 
 import org.bson.Document;
@@ -36,8 +29,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmConfiguration;
 import io.realm.mongodb.App;
 import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
@@ -50,7 +41,6 @@ public class PlantSearchFragment extends Fragment {
 
     private PlantSearchViewModel plantSearchViewModel;
     Realm realm;
-    RealmPlantManager manager;
     Context context;
     RecyclerView rv;
     private static ArrayList<PlantSearch> plantList;
@@ -82,14 +72,13 @@ public class PlantSearchFragment extends Fragment {
 
         addPlant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 Navigation.findNavController(v).navigate(R.id.action_navigation_plant_search_to_navigation_plant_search_add);
-
             }
         });
 
         context = getActivity();
-        User user = new WifiModule().getUser();
+        User user = new Manager().getUser();
+        //User user = new WifiModule().getUser();
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
         MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
         MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("PlantSearch");

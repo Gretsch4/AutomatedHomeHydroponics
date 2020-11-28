@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.Plant_Search.PlantSearchFragment">
 
-    <SearchView
-        android:id="@+id/searchPlantView"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button_add_plant"
         android:layout_height="wrap_content"
@@ -24,7 +14,8 @@
         android:text="Add Plant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/plant_recycle"
@@ -36,6 +27,6 @@
         app:layout_constraintBottom_toTopOf="@+id/button_add_plant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchPlantView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

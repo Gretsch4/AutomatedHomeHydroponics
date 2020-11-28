@@ -40,7 +40,7 @@ public class WifiModule {
     private static ArrayList<PlantLogs> recentPlants = new ArrayList<PlantLogs>();
     Handler handler = new Handler();
     private static String previousMessage = "";
-    private static WifiModule instance = new WifiModule();
+    //private static WifiModule instance = new WifiModule();
     private static PlantLogs mostRecent;
     private static App app;
     private static User user;
@@ -52,17 +52,20 @@ public class WifiModule {
 
 
     // static method to create instance of Singleton class
-    public static WifiModule getInstance(){return instance;}
+    //public static WifiModule getInstance(){return instance;}
 
     public WifiModule(Context context){
         this.serverResponse = "0.0";
         WifiModule.context = context;
+        user = app.currentUser();
         //this.client = new OkHttpClient();
     }
 
     public WifiModule() {
         //recentPlants.add(new Plant(0.0, 1.2,1.3,4.56,235.3,1344.5,5134.5,4343.77,234.33,234.555));
         //this.client = new OkHttpClient();
+        //user = app.currentUser();
+
     }
 
     public void startPoll(){
@@ -119,6 +122,9 @@ public class WifiModule {
     public static User getUser() {
         return user;
     }
+    public static void setUser(App p) {
+        user = app.currentUser();
+    }
 
     public void sendCommand(String command){
         ConnectivityManager connManager = (ConnectivityManager)
@@ -131,6 +137,13 @@ public class WifiModule {
         }
     }
 
+    public String isLowGood(String num){
+        if(num.equals("1")){
+            return "Good";
+        }
+        else
+            return "Low";
+    }
     public String getServerResponse(){
         return serverResponse;
     }
@@ -161,10 +174,10 @@ public class WifiModule {
                     newPlant.setHumid(split[4]);
                     newPlant.setLight(split[5]);
                     newPlant.setDist(split[6]);
-                    newPlant.setWaterLvl(split[7]);
-                    newPlant.setNutrientLvl(split[8]);
-                    newPlant.setPhUp(split[9]);
-                    newPlant.setPhDown(split[10]);
+                    newPlant.setWaterLvl(isLowGood(split[7]));
+                    newPlant.setNutrientLvl(isLowGood(split[8]));
+                    newPlant.setPhUp(isLowGood(split[9]));
+                    newPlant.setPhDown(isLowGood(split[10]));
 
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss, (EEE, d MMM yyyy)");
                     String currentDateandTime = sdf.format(new Date());
@@ -174,6 +187,7 @@ public class WifiModule {
                     mostRecent = newPlant;
 
                     user = app.currentUser();
+                    //setUser(app);
                     MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
                     MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
                     MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("PlantLogs");
@@ -186,10 +200,10 @@ public class WifiModule {
                             .append("airTemp", split[4])
                             .append("waterTemp", split[5])
                             .append("waterLvl", split[6])
-                            .append("dist", split[7])
-                            .append("phUp", split[8])
-                            .append("phDown", split[9])
-                            .append("nutrientLvl", split[10]);
+                            .append("dist", isLowGood(split[7]))
+                            .append("phUp", isLowGood(split[8]))
+                            .append("phDown", isLowGood(split[9]))
+                            .append("nutrientLvl", isLowGood(split[10]));
 
                     mongoCollection.insertOne(PlantLogs).getAsync(new App.Callback<InsertOneResult>() {
                         @Override
@@ -202,48 +216,6 @@ public class WifiModule {
                             }
                         }
                     });
-
-/*
-                    realm = Realm.getDefaultInstance();
-                    Log.i("realmSchema", "before exe" + realm.getSchema().toString());
-                        realm.executeTransactionAsync(new Realm.Transaction(){
-                            @Override
-                            public void execute(Realm realm) {
-                                PlantLogs plant = realm.createObject(PlantLogs.class);
-                                plant.set_id(new ObjectId());
-                                plant.setTds(newPlant.getTds());
-                                plant.setPh(newPlant.getPh());
-                                plant.setWaterTemp(newPlant.getWaterTemp());
-                                plant.setAirTemp(newPlant.getAirTemp());
-                                plant.setHumid(newPlant.getHumid());
-                                plant.setLight(newPlant.getLight());
-                                plant.setDist(newPlant.getDist());
-                                plant.setWaterLvl(newPlant.getWaterLvl());
-                                plant.setNutrientLvl(newPlant.getNutrientLvl());
-                                plant.setPhUp(newPlant.getPhUp());
-                                plant.setPhDown(newPlant.getPhDown());
-                                plant.setDate((newPlant.getDate()));
-
-                                Log.i("realmExe", "passed through realm");
-                                //realm.insert(newPlant);
-                            }
-                        }, new Realm.Transaction.OnSuccess() {
-                            @Override
-                            public void onSuccess(){
-                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-                                Log.i("realmExe", "exe confirmed");
-                                realm.close();
-                            }
-
-                        }, new Realm.Transaction.OnError() {
-                            @Override
-                            public  void onError(Throwable error) {
-                                Toast.makeText(context, "Input Failed", Toast.LENGTH_SHORT).show();
-                                realm.close();
-                            }
-                        });
-
- */
                     previousMessage = serverResponse;
                 }
             }

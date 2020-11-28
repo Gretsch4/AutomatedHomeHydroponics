@@ -1,6 +1,22 @@
 package com.example.automatedhomehydroponics.data;
 
+import android.util.Log;
+
+import androidx.navigation.Navigation;
+
+import com.example.automatedhomehydroponics.R;
+import com.example.automatedhomehydroponics.RealmHelper.Manager;
 import com.example.automatedhomehydroponics.data.model.LoggedInUser;
+
+import org.bson.BsonObjectId;
+import org.bson.Document;
+
+import io.realm.mongodb.App;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.result.InsertOneResult;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -46,6 +62,7 @@ public class LoginRepository {
     public Result<LoggedInUser> login(String username, String password) {
         // handle login
         Result<LoggedInUser> result = dataSource.login(username, password);
+
         if (result instanceof Result.Success) {
             setLoggedInUser( ((Result.Success<LoggedInUser>) result).getData());
         }

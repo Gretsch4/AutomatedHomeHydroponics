@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automatedhomehydroponics.R;
+import com.example.automatedhomehydroponics.RealmHelper.Manager;
 import com.example.automatedhomehydroponics.ui.Logs.CustomAdapter;
 import com.example.automatedhomehydroponics.ui.Logs.LogsViewHolder;
 import com.example.automatedhomehydroponics.wifi.WifiModule;
@@ -61,13 +62,16 @@ public class CustomPlantAdapter extends RecyclerView.Adapter<PlantViewHolder> {
 
         holder.setPlant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                plantData.sendCommand(p.getTdsMax() + "," + p.getTdsMin() + "," + p.getPhMax() + "," +p.getPhMin() + "," +p.getWaterTempMax() + "," + p.getWaterTempMin() + "," + p.getAirTempMax() + "," + p.getAirTempMin() + "," + p.getHumidMax() + "," + p.getHumidMin() + "," + p.getLightMax() + "," + p.getHours());
+                //tdsamx,tdsmin,phmax,phmin,waterTmax,waterTmin,airTmax,airTmin,humidmax,humidmin,lightMax,lightmin, hours
+                plantData.sendCommand(p.getTdsMax() + "," + p.getTdsMin() + "," + p.getPhMax() + "," +p.getPhMin() +
+                        "," +p.getWaterTempMax() + "," + p.getWaterTempMin() + "," + p.getAirTempMax() + "," + p.getAirTempMin() +
+                        "," + p.getHumidMax() + "," + p.getHumidMin() + "," + p.getLightMax() + "," + p.getLightMin() + "," + p.getHours());
             }
         });
 
         holder.deletePlant.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                User user = plantData.getUser();
+                User user = new Manager().getUser();
                 MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
                 MongoDatabase mongoDatabase = mongoClient.getDatabase("HydroponicsMobileApp");
                 MongoCollection<Document> mongoCollection  = mongoDatabase.getCollection("PlantSearch");

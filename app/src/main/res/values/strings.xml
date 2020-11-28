@@ -3,7 +3,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -25,7 +26,7 @@
     <string name="sensor_water_level">Water Level</string>
     <string name="sensor_ph_up">pH Up Level</string>
     <string name="sensor_ph_down">pH Down Level</string>
-    <string name="sensor_distance">Distance</string>
+    <string name="sensor_distance">Plant Height</string>
     <string name="sensor_air_temp">Air Temperature</string>
     <string name="sensor_nutrient">Nutrient Level</string>
     <string name="log_card_title">Log Title</string>
